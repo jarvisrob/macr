@@ -1,0 +1,36 @@
+# Packages
+tidyverse
+# glue
+# httr
+# readxl
+# lubridate
+# rvest
+
+dbplyr
+
+tidymodels
+broom
+
+# IRkernel
+
+renv
+here
+
+testthat
+assertthat
+
+tictoc
+progress
+askpass
+stringi
+withr
+optparse
+
+rmarkdown
+knitr
+bookdown
+pagedown
+blogdown
+
+fitzRoy
+bomrang
