@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-echo 'macr: Installing or upgrading R on macOS'
-echo 'Requires Homebrew: https://brew.sh/'
+echo 'macr: Installing or upgrading R on macOS using Homebrew (https://brew.sh)'
 
 
-# check if Homebrew installed, if not, then say needs to be installed and quit
+# Check if Homebrew installed ---
 if ! command -v brew &> /dev/null
 then
   echo 'ERROR: Homebrew not found with command brew. Please install Homebrew before using this script.'
@@ -13,9 +12,12 @@ fi
 
 
 # Argument parsing ---
+
+# Default values for switch arguments
 uninstall_first=0
 blas=1
 
+# Argument parsing loop
 while [[ "$#" -gt 0 ]]
 do
 case $1 in
@@ -44,20 +46,13 @@ esac
 done
 
 
+# R installation/upgrade ---
 
-echo "uninstall_first_param=$uninstall_first"
-echo "blas_param=$blas"
-
-
-
-# check if R installed by brew already
+# Check if R installed by brew already
 brew list --cask r
 list_status=$?
 
-echo "uninstall_first_param=$uninstall_first"
-
-
-
+# Logic sequence
 if [ ! $list_status -eq 0 ]
 then
   echo 'No existing Hombrew installation of R found. Installing R using Homebrew ...'
@@ -65,7 +60,6 @@ then
 
 elif [ $uninstall_first -eq 1 ]
 then
-  echo "uninstall_first_param=$uninstall_first"
   echo 'Uninstalling existing Homebrew installation of R ...'
   # brew uninstall --cask r
   echo 'Installing R using Homebrew ...'
@@ -95,7 +89,7 @@ then
 fi
 
 
-# BLAS - Make R multi-threaded using Apple's Accelerate Framework
+# BLAS: Make R multi-threaded using Apple's Accelerate Framework ---
 if [ $blas -eq 1 ]
 then
   echo 'Linking Apple BLAS to make R run multi-threaded by default where possible ...'
@@ -120,16 +114,14 @@ else
 
 fi
 
-# install packages
+
+# Install packages ---
 # - done using Rscript
 
 
-
-
-# install/configire IRkernel for Jupyter
+# Install and configire IRkernel for using R in Jupyter ---
 # - done using R
 
-# Install IRkernel so can use R in Jupyter
 # This needs to be done while conda base environment is active, because it needs to see the Jupyter installation
 # condaon
 # conda activate base
