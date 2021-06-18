@@ -1,24 +1,13 @@
-# Packages
+
 tidyverse
-# glue
-# httr
-# readxl
-# lubridate
-# rvest
-
-dbplyr
-
 tidymodels
 broom
-
-# IRkernel
-
+dbplyr
+IRkernel
 renv
 here
-
 testthat
 assertthat
-
 tictoc
 progress
 askpass

@@ -1,0 +1,8 @@
+cran:
+- tidymodels
+#- broom
+#- dbplyr
+#- optparse
+- knitr
+- pagedown
+#- blogdown

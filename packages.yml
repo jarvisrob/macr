@@ -1,0 +1,23 @@
+cran:
+- tidyverse
+- tidymodels
+- broom
+- dbplyr
+- IRkernel
+- renv
+- here
+- testthat
+- assertthat
+- tictoc
+- progress
+- askpass
+- stringi
+- withr
+- optparse
+- rmarkdown
+- knitr
+- bookdown
+- pagedown
+- blogdown
+- fitzRoy
+- bomrang

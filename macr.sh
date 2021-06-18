@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-echo 'macr: Installing or upgrading R on macOS using Homebrew (https://brew.sh)'
+echo 'macr: Installing or upgrading R on macOS using Homebrew cask (https://brew.sh)'
 
 
 # Check if Homebrew installed ---
 if ! command -v brew &> /dev/null
 then
-  echo 'ERROR: Homebrew not found with command brew. Please install Homebrew before using this script.'
+  echo 'ERROR: Homebrew not found with command brew. Please install Homebrew before using this script. Aborting script.'
   exit 1
 fi
 
@@ -48,8 +48,11 @@ done
 
 # R installation/upgrade ---
 
+echo 'First, updatng Homebrew formulae and casks ...'
+brew update
+
 # Check if R installed by brew already
-brew list --cask r
+brew list --cask r  &> /dev/null
 list_status=$?
 
 # Logic sequence
@@ -71,7 +74,7 @@ else
   if [ $outdated_status -eq 0 ]
   then
     R --version
-    echo 'MESSAGE: Homebrew installation of R is already up-to-date. No update required. Script is ending.'
+    echo 'MESSAGE: Homebrew installation of R is already up-to-date. No upgrade required. Script is ending.'
     exit 0
   else
     echo 'Upgrading Hombrew installation of R ...'
@@ -84,7 +87,7 @@ fi
 R --version
 if [ ! $? -eq 0 ]
 then
-  echo 'ERROR: R installation/update failed'
+  echo 'ERROR: R installation/upgrade failed. Aborting script.'
   exit 1
 fi
 
@@ -116,10 +119,11 @@ fi
 
 
 # Install packages ---
-# - done using Rscript
+echo "Installing packages ..."
+Rscript --verbose --vanilla install-packages.R packages.yml
 
 
-# Install and configire IRkernel for using R in Jupyter ---
+# Configire IRkernel for using R in Jupyter ---
 # - done using R
 
 # This needs to be done while conda base environment is active, because it needs to see the Jupyter installation
